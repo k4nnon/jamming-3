@@ -1,0 +1,64 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div style=" padding-top: 50px;
+padding-right: 30px;
+padding-bottom: 50px;
+padding-left: 80px;">
+    <div>
+        <h2>Hola {{user.username}}!</h2>
+
+        <h2>Modificar Perfil</h2>
+    </div>
+    <script>
+        function validateForm() {
+            var x = document.forms["myForm"]["contraseña"].value;
+            var y = document.forms["myForm"]["contraseña2"].value;
+            var Exp = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i;
+            if (x != "" || x != "") {
+                if ((x == "" && y != "") || y == "" && x != "") {
+                    alert("contraseña incompleta");
+                    return false;
+                }
+                if (x.length < 8) {
+                    alert("contraseña muy corta minimo 8 caracteres")
+                    return false
+                }
+                if (!x.match(Exp) || !y.match(Exp)) {
+                    alert("contraseña no alfaNumerica");
+                    return false
+                }
+                if (x != y) {
+                    alert("contraseñas no iguales")
+                    return false
+                }
+            }
+
+        }
+    </script>
+    <div style="width: 50%">
+        <form onsubmit="return validateForm()" name="myForm" method="post">{% csrf_token %}
+            <div class="form-group">
+                <label for="FormControlInput1">Email address</label>
+                <input type="email" class="form-control" name="email" placeholder="mail@ejemplo.com">
+            </div>
+            <div class="form-group">
+
+                <label for="FormControlInput1">Nombre de usuario</label>
+                <input type="text" class="form-control" name="nombre" placeholder={{user.username}}>
+            </div>
+            <div class="form-group">
+
+                <label for="FormControlInput1">Constraseña</label>
+                <input type="password" class="form-control" name="contraseña" placeholder="debe ser alfanumerica y 8 caracteres minimo">
+            </div>
+            <div class="form-group">
+
+                <label for="FormControlInput1">Repetir contraseña</label>
+                <input type="password" class="form-control" name="contraseña2" placeholder="debe ser alfanumerica y 8 caracteres minimo">
+            </div>
+            <div> <button type="submit">guardar</button></div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

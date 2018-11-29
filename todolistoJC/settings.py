@@ -84,8 +84,8 @@ DATABASES = {
     }
 }
 
-LOGIN_URL = '/todolistoJC/login'
-LOGIN_REDIRECT_URL='/todolstoJC/home'
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL='/perfil'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
